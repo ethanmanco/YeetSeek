@@ -9,6 +9,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new MyHomePage(),
+        theme: ThemeData(
+          // Define the default brightness and colors.
+          brightness: Brightness.dark,
+          primaryColor: Colors.deepPurple[600],
+          accentColor: Colors.deepPurple[200],
+
+          // Define the default font family.
+          fontFamily: 'Open Sans',
+
+          // Define the default TextTheme. Use this to specify the default
+          // text styling for headlines, titles, bodies of text, and more.
+          textTheme: TextTheme(
+            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold,
+            ),
+            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
+        )
     );
   }
 }
@@ -23,14 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text('Yeet Seek')),
+        appBar: new AppBar(title: new Text('Yeet Seek'), centerTitle: true),
         body: new FlutterMap(
             options: new MapOptions(
                 center: new LatLng(35.22, -101.83), minZoom: 10.0),
             layers: [
               new TileLayerOptions(
                   urlTemplate:
-                  "",
+                      "",
                   additionalOptions: {
                     'accessToken':
                     '',
@@ -38,14 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
               new MarkerLayerOptions(markers: [
                 new Marker(
-                    width: 45.0,
-                    height: 45.0,
+                    width: 60.0,
+                    height: 60.0,
                     point: new LatLng(35.215, -101.825),
                     builder: (context) => new Container(
                       child: IconButton(
                         icon: Icon(Icons.location_on),
-                        color: Colors.blue,
-                        iconSize: 45.0,
+                        color: Theme.of(context).accentColor,
+                        iconSize: 60.0,
                         onPressed: () {
                           print('Marker tapped');
                         },
