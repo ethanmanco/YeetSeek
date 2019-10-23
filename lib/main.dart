@@ -54,22 +54,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     '',
                     'id': ''
                   }),
-              new MarkerLayerOptions(markers: [
-                new Marker(
-                    width: 60.0,
-                    height: 60.0,
-                    point: new LatLng(35.215, -101.825),
-                    builder: (context) => new Container(
-                      child: IconButton(
-                        icon: Icon(Icons.location_on),
-                        color: Theme.of(context).accentColor,
-                        iconSize: 60.0,
-                        onPressed: () {
-                          print('Marker tapped');
-                        },
-                      ),
-                    ))
-              ])
+              new MarkerLayerOptions(
+                  markers: pointCollection
+              )
             ]));
+  }
+
+  List<Marker> pointCollection = [];
+
+  setMarkers() {
+    pointCollection.add(
+        new Marker(
+          width: 60.0,
+          height: 60.0,
+          point: new LatLng(35.215, -101.825),
+          builder: (context) => new Container(
+            child: IconButton(
+              icon: Icon(Icons.location_on),
+              color: Theme.of(context).accentColor,
+              iconSize: 60.0,
+              onPressed: () {
+                print('Marker tapped');
+              },
+            ),
+          )
+        )
+    );
+    return pointCollection;
   }
 }
