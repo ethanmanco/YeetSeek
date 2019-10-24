@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     'id': ''
                   }),
               new MarkerLayerOptions(
-                  markers: pointCollection
+                  markers: setMarkers()
               )
             ]));
   }
