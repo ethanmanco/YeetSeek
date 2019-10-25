@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
@@ -57,8 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
               new MarkerLayerOptions(
                   markers: setMarkers()
               )
-            ]));
+            ]),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print("Button pressed");
+            },
+          child: Icon(Icons.navigation),
+          backgroundColor: Theme.of(context).accentColor,
+    ),);
+
   }
+
+
 
   List<Marker> pointCollection = [];
 
@@ -83,3 +94,5 @@ class _MyHomePageState extends State<MyHomePage> {
     return pointCollection;
   }
 }
+
+
