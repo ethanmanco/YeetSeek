@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: new AppBar(title: new Text('Yeet Seek'), centerTitle: true),
         body: new FlutterMap(
             options: new MapOptions(
-                center: new LatLng(35.22, -101.83), minZoom: 10.0),
+                center: new LatLng(35.22, -101.83), minZoom: 5.0),
             layers: [
               new TileLayerOptions(
                   urlTemplate:
@@ -57,7 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
               new MarkerLayerOptions(
                   markers: setMarkers()
-              )
+              ),
+              new PolylineLayerOptions(
+                  polylines: [
+                    new Polyline(
+                        points: wayPoints,
+                        strokeWidth: 5.0,
+                        color: Theme.of(context).primaryColor
+                    )
+                  ]
+              ),
             ]),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -69,7 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-
+  var wayPoints = <LatLng>[
+    new LatLng(35.22, -101.83),
+    new LatLng(35.21, -101.84),
+    /*new LatLng(35.24, -101.85),
+    new LatLng(35.20, -101.82),
+    new LatLng(35.26, -101.81),*/
+  ];
 
   List<Marker> pointCollection = [];
 
@@ -91,6 +106,40 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         )
     );
+    /*pointCollection.add(
+        new Marker(
+            width: 60.0,
+            height: 60.0,
+            point: new LatLng(35.22, -101.85),
+            builder: (context) => new Container(
+              child: IconButton(
+                icon: Icon(Icons.location_on),
+                color: Theme.of(context).accentColor,
+                iconSize: 60.0,
+                onPressed: () {
+                  print('Marker tapped');
+                },
+              ),
+            )
+        )
+    );
+    pointCollection.add(
+        new Marker(
+            width: 60.0,
+            height: 60.0,
+            point: new LatLng(35.23, -101.81),
+            builder: (context) => new Container(
+              child: IconButton(
+                icon: Icon(Icons.location_on),
+                color: Theme.of(context).accentColor,
+                iconSize: 60.0,
+                onPressed: () {
+                  print('Marker tapped');
+                },
+              ),
+            )
+        )
+    );*/
     return pointCollection;
   }
 }
