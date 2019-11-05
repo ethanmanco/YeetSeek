@@ -39,13 +39,45 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  // Points are added through onLongPress to this list
+  List<LatLng> pointCollection = [];
+
+  // List of wayPoints
+  var wayPoints = <LatLng>[
+    /*new LatLng(35.22, -101.83),
+    new LatLng(35.21, -101.84),
+    new LatLng(35.24, -101.85),
+    new LatLng(35.20, -101.82),
+    new LatLng(35.26, -101.81),*/
+  ];
+
   @override
   Widget build(BuildContext context) {
+    // Settings for the markers
+    var markers = pointCollection.map((latlng) {
+      return Marker(
+        width: 75.0,
+        height: 75.0,
+        point: latlng,  // Sent from _handleLongPress
+        builder: (ctx) => Container(
+          child: IconButton(
+            icon: Icon(Icons.location_on),
+            color: Theme.of(context).accentColor,
+            iconSize: 60.0,
+            onPressed: () {
+              print('Marker tapped');
+            },
+          ),
+        ),
+      );
+    }).toList();
+
     return new Scaffold(
         appBar: new AppBar(title: new Text('Yeet Seek'), centerTitle: true),
-        body: new FlutterMap(
+        body: Center( child: new FlutterMap(
             options: new MapOptions(
-                center: new LatLng(35.22, -101.83), minZoom: 5.0),
+                center: new LatLng(35.22, -101.83), minZoom: 5.0,
+            onLongPress: _handleLongPress),
             layers: [
               new TileLayerOptions(
                   urlTemplate:
@@ -56,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     'id': ''
                   }),
               new MarkerLayerOptions(
-                  markers: setMarkers()
+                  markers: markers
               ),
               new PolylineLayerOptions(
                   polylines: [
@@ -68,79 +100,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   ]
               ),
             ]),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             print("Button pressed");
             },
           child: Icon(Icons.navigation),
           backgroundColor: Theme.of(context).accentColor,
-    ),);
-
+        ),
+    );
   }
 
-  var wayPoints = <LatLng>[
-    new LatLng(35.22, -101.83),
-    new LatLng(35.21, -101.84),
-    /*new LatLng(35.24, -101.85),
-    new LatLng(35.20, -101.82),
-    new LatLng(35.26, -101.81),*/
-  ];
-
-  List<Marker> pointCollection = [];
-
-  setMarkers() {
-    pointCollection.add(
-        new Marker(
-          width: 60.0,
-          height: 60.0,
-          point: new LatLng(35.215, -101.825),
-          builder: (context) => new Container(
-            child: IconButton(
-              icon: Icon(Icons.location_on),
-              color: Theme.of(context).accentColor,
-              iconSize: 60.0,
-              onPressed: () {
-                print('Marker tapped');
-              },
-            ),
-          )
-        )
-    );
-    /*pointCollection.add(
-        new Marker(
-            width: 60.0,
-            height: 60.0,
-            point: new LatLng(35.22, -101.85),
-            builder: (context) => new Container(
-              child: IconButton(
-                icon: Icon(Icons.location_on),
-                color: Theme.of(context).accentColor,
-                iconSize: 60.0,
-                onPressed: () {
-                  print('Marker tapped');
-                },
-              ),
-            )
-        )
-    );
-    pointCollection.add(
-        new Marker(
-            width: 60.0,
-            height: 60.0,
-            point: new LatLng(35.23, -101.81),
-            builder: (context) => new Container(
-              child: IconButton(
-                icon: Icon(Icons.location_on),
-                color: Theme.of(context).accentColor,
-                iconSize: 60.0,
-                onPressed: () {
-                  print('Marker tapped');
-                },
-              ),
-            )
-        )
-    );*/
-    return pointCollection;
+  // Grabs the LatLng of the position of onLongPress clock
+  void _handleLongPress(LatLng latlng) {
+    setState(() {
+      pointCollection.add(latlng);
+    });
   }
 }
 
