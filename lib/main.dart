@@ -51,13 +51,22 @@ class _MyHomePageState extends State<MyHomePage> {
     new LatLng(35.26, -101.81),*/
   ];
 
+  AnchorPos anchorPos;
+
+  // Initializes anchor alignment to top
+  @override
+  void initState() {
+    super.initState();
+    anchorPos = AnchorPos.align(AnchorAlign.top);
+  }
+
   @override
   Widget build(BuildContext context) {
     // Settings for the markers
     var markers = pointCollection.map((latlng) {
       return Marker(
         width: 75.0,
-        height: 75.0,
+        height: 62.5,
         point: latlng,  // Sent from _handleLongPress
         builder: (ctx) => Container(
           child: IconButton(
@@ -69,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
         ),
+        anchorPos: anchorPos,
       );
     }).toList();
 
