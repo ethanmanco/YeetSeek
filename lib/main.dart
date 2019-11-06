@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Theme.of(context).accentColor,
             iconSize: 60.0,
             onPressed: () {
-              print('Marker tapped');
+              print("Marker tapped");
             },
           ),
         ),
@@ -97,9 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     '',
                     'id': ''
                   }),
-              new MarkerLayerOptions(
-                  markers: markers
-              ),
               new PolylineLayerOptions(
                   polylines: [
                     new Polyline(
@@ -108,6 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Theme.of(context).primaryColor
                     )
                   ]
+              ),
+              new MarkerLayerOptions(
+                  markers: markers
               ),
             ]),
         ),
@@ -128,5 +128,3 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 }
-
-
