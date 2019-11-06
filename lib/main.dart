@@ -74,7 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Theme.of(context).accentColor,
             iconSize: 60.0,
             onPressed: () {
-              print("Marker tapped");
+              setState(() {
+                pointCollection.remove(latlng);
+              });
             },
           ),
         ),
@@ -87,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center( child: new FlutterMap(
             options: new MapOptions(
                 center: new LatLng(35.22, -101.83), minZoom: 5.0,
-            onLongPress: _handleLongPress),
+                onLongPress: _handleLongPress),
             layers: [
               new TileLayerOptions(
                   urlTemplate:
